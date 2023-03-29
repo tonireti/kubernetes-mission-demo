@@ -18,6 +18,8 @@ pipeline {
       }
       steps {
         withKubeConfig([credentialsId: 'jenkins-gke-1']) {
+            sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
+            sh 'chmod u+x ./kubectl'
             sh "kubectl config use-context onlineboutique-cluster"
             sh "kubectl apply -f ./release/kubernetes-manifests.yaml"
         }
