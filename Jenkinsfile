@@ -32,7 +32,7 @@ pipeline {
       steps {
         withKubeConfig([credentialsId: 'jenkins-gke-1']) {
             sh "kubectl get pods"
-             "kubectl get service frontend-external | awk '{print \$4}'"
+            sh "kubectl get service frontend-external | awk '{print \$4}'"
         }
       }
     }
