@@ -16,9 +16,11 @@ pipeline {
       environment {
         DEPLOYMENT_NAME = "onlineboutique-deployment"
       }
-      withKubeConfig([credentialsId: 'jenkins-gke-1']){
-        sh "kubectl config use-context onlineboutique-cluster"
-        sh "kubectl apply -f ./release/kubernetes-manifests.yaml"
+      steps {
+        withKubeConfig([credentialsId: 'jenkins-gke-1']) {
+            sh "kubectl config use-context onlineboutique-cluster"
+            sh "kubectl apply -f ./release/kubernetes-manifests.yaml"
+        }
       }
     
     }
@@ -27,9 +29,11 @@ pipeline {
       environment {
         DEPLOYMENT_NAME = "example-deployment"
       }
-      withKubeConfig([credentialsId: 'jenkins-gke-1']){
+      steps {
+        withKubeConfig([credentialsId: 'jenkins-gke-1']) {
             sh "kubectl get pods"
-            sh "kubectl get service frontend-external | awk '{print \$4}'"
+             "kubectl get service frontend-external | awk '{print \$4}'"
+        }
       }
     }
   }
