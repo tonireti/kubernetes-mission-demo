@@ -19,7 +19,7 @@ pipeline {
       steps {
         withKubeConfig([credentialsId: 'jenkins-gke-1']) {
             sh """
-            RUN echo "deb http://packages.cloud.google.com/apt cloud-sdk-stretch main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
+            echo "deb http://packages.cloud.google.com/apt cloud-sdk-stretch main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
             && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
             && apt-get update -y && apt-get install google-cloud-sdk -y \
             && PATH=$PATH:/root/google-cloud-sdk/bin
