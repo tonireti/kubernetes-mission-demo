@@ -18,6 +18,7 @@ pipeline {
       }
       steps {
         withKubeConfig([credentialsId: 'jenkins-gke-1']) {
+            sh "gcloud config set project kubernetes-projects-381902"
             sh "./kubectl config get-contexts"
             sh "./kubectl config view"
             sh "./kubectl get svc"
