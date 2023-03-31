@@ -1,9 +1,5 @@
 pipeline {
-  agent {
-    kubernetes{
-        cloud 'onlineboutique-cluster'
-    }
-  }
+  agent any
   
   triggers {
         pollSCM '*/5 * * * *'
