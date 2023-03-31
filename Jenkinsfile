@@ -18,6 +18,7 @@ pipeline {
       }
       steps {
         withKubeConfig([credentialsId: 'jenkins-gke-1']) {
+            sh 'export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && sudo apt-get update && sudo apt-get install google-cloud-sdk'
             sh "gcloud config set project kubernetes-projects-381902"
             sh "./kubectl config get-contexts"
             sh "./kubectl config view"
