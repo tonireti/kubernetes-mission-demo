@@ -21,6 +21,8 @@ pipeline {
             sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
             sh 'chmod u+x ./kubectl'
             sh "./kubectl config get-contexts"
+            sh "./kubectl config view"
+            sh "./kubectl get svc"
             //sh "./kubectl config use-context gke_kubernetes-projects-381902_us-central1_onlineboutique-cluster"
             //sh "./kubectl apply -f ./release/kubernetes-manifests.yaml"
         }
@@ -30,7 +32,7 @@ pipeline {
 
     stage('Deliver') {
       environment {
-        DEPLOYMENT_NAME = "example-deployment"
+        DEPLOYMENT_NAME = "onlineboutique-deployment"
       }
       steps {
         withKubeConfig([credentialsId: 'jenkins-gke-1']) {
