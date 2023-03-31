@@ -19,10 +19,13 @@ pipeline {
       steps {
         withKubeConfig([credentialsId: 'jenkins-gke-1']) {
             sh """
-            echo "deb http://packages.cloud.google.com/apt cloud-sdk-stretch main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
-            && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
-            && apt-get update -y && apt-get install google-cloud-sdk -y \
-            && PATH=$PATH:/root/google-cloud-sdk/bin
+            #!/bin/bash 
+            echo "deploy stage";
+            curl -o /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-225.0.0-linux-x86_64.tar.gz;
+            tar -xvf /tmp/google-cloud-sdk.tar.gz -C /tmp/;
+            /tmp/google-cloud-sdk/install.sh -q;
+
+                        source /tmp/google-cloud-sdk/path.bash.inc;
             """
             sh "gcloud config set project kubernetes-projects-381902"
             sh "./kubectl config get-contexts"
