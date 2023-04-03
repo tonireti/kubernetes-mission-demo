@@ -33,8 +33,8 @@ pipeline {
 
             '''
           
-            //sh "./kubectl config use-context gke_kubernetes-projects-381902_us-central1_onlineboutique-cluster"
-            //sh "./kubectl apply -f ./release/kubernetes-manifests.yaml"
+            sh "kubectl config use-context gke_kubernetes-projects-381902_us-central1_onlineboutique-cluster"
+            sh "kubectl apply -f ./release/kubernetes-manifests.yaml"
         }
       }
     
