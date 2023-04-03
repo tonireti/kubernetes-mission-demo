@@ -19,6 +19,7 @@ pipeline {
       steps {
         withKubeConfig([credentialsId: 'jenkins-gke-1']) {
             sh '''
+              
               #!/bin/bash
               cd //google-cloud-sdk/bin
               ls
@@ -38,7 +39,7 @@ pipeline {
           
       }
     
-    }
+    }}
 
     stage('Deliver') {
       environment {
