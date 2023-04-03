@@ -23,6 +23,7 @@ pipeline {
               cd //google-cloud-sdk/bin
               ls
               echo "This is $(pwd)"
+              ./gcloud components install gke-gcloud-auth-plugin
               ./gcloud config set project kubernetes-projects-381902
               ./gcloud container clusters list
               ./gcloud container clusters get-credentials onlineboutique-cluster --region us-central1
