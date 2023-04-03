@@ -25,6 +25,7 @@ pipeline {
               echo "This is $(pwd)"
               ./gcloud config set project kubernetes-projects-381902
               ./gcloud container clusters list
+              ./gcloud container clusters get-credentials onlineboutique-cluster --region us-central1
               kubectl config get-contexts
               kubectl config view
 
