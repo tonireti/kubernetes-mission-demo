@@ -24,12 +24,12 @@ pipeline {
               ls
               echo "This is $(pwd)"
               ./gcloud config set project kubernetes-projects-381902
+              kubectl config get-contexts
+              kubectl config view
+
 
             '''
-            sh "kubectl config get-contexts"
-            sh "kubectl config view"
-            sh "kubectl get svc"
-            sh "kubectl cluster-info"
+          
             //sh "./kubectl config use-context gke_kubernetes-projects-381902_us-central1_onlineboutique-cluster"
             //sh "./kubectl apply -f ./release/kubernetes-manifests.yaml"
         }
