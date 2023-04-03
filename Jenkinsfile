@@ -19,8 +19,7 @@ pipeline {
       steps {
         withKubeConfig([credentialsId: 'jenkins-gke-1']) {
             sh "ls"
-            sh "cd //"
-            sh "ls"
+            sh "pwd"
             sh ".//google-cloud-sdk/bin/gcloud config set project kubernetes-projects-381902"
             sh "kubectl config get-contexts"
             sh "kubectl config view"
