@@ -4,6 +4,13 @@ pipeline {
   triggers {
         pollSCM '*/5 * * * *'
     }
+  environment {
+        PROJECT_ID = 'kubernetes-projects-381902'
+        CLUSTER_NAME = 'onlineboutique-cluster'
+        LOCATION = 'us-central1'
+        CREDENTIALS_ID = 'jenkins-gke-1'
+    }
+    
   stages {
     stage('Checkout') {
       steps {
@@ -17,24 +24,17 @@ pipeline {
         DEPLOYMENT_NAME = "onlineboutique-deployment"
       }
       steps {
-        withKubeConfig([credentialsId: 'jenkins-gke-1']) {
-            sh '''
-              
-              #!/bin/bash
-              cd //google-cloud-sdk/bin
-              ls
-              echo "This is $(pwd)"
-              ./gcloud config set project kubernetes-projects-381902
-              ./gcloud container clusters list
-              ./gcloud container clusters get-credentials onlineboutique-cluster --region us-central1
-              kubectl config get-contexts
-              kubectl config use-context gke_kubernetes-projects-381902_us-central1_onlineboutique-cluster
-              kubectl apply -f /var/jenkins_home/workspace/onlineboutique-practice-app/release/kubernetes-manifests.yaml
-
-
-
-
-            '''
+        stage('Deploy to GKE') {
+            steps{
+                step([
+                $class: 'KubernetesEngineBuilder',
+                projectId: env.PROJECT_ID,
+                clusterName: env.CLUSTER_NAME,
+                location: env.LOCATION,
+                manifestPattern: './release/kubernetes-manifests.yaml',
+                credentialsId: env.CREDENTIALS_ID,
+                verifyDeployments: true])
+            }
           
           
       }
