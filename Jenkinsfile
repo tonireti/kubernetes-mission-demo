@@ -24,8 +24,10 @@ pipeline {
               ls
               echo "This is $(pwd)"
               ./gcloud config set project kubernetes-projects-381902
+              ./gcloud container clusters list
               kubectl config get-contexts
               kubectl config view
+
 
 
             '''
