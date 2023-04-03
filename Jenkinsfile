@@ -39,8 +39,6 @@ pipeline {
           
       }
     
-    }}
-
     stage('Deliver') {
       environment {
         DEPLOYMENT_NAME = "onlineboutique-deployment"
