@@ -27,7 +27,6 @@ pipeline {
               ./gcloud container clusters list
               ./gcloud container clusters get-credentials onlineboutique-cluster --region us-central1
               kubectl config get-contexts
-              kubectl config view
               kubectl config use-context gke_kubernetes-projects-381902_us-central1_onlineboutique-cluster
               kubectl apply -f /var/jenkins_home/workspace/onlineboutique-practice-app/release/kubernetes-manifests.yaml
 
