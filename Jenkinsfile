@@ -18,8 +18,8 @@ pipeline {
       }
       steps {
         withKubeConfig([credentialsId: 'jenkins-gke-1']) {
-            sh "echo 'export PATH=$PATH://google-cloud-sdk/bin' >> ~/.bashrc"
-            sh "gcloud config set project kubernetes-projects-381902"
+
+            sh "./google-google-sdk/bin/gcloud config set project kubernetes-projects-381902"
             sh "kubectl config get-contexts"
             sh "kubectl config view"
             sh "kubectl get svc"
