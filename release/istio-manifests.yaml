@@ -23,8 +23,9 @@ kind: Gateway
 metadata:
   name: istio-gateway
 spec:
-  gatewayClassName: istio
-  listeners:
+  selector:
+    istio: istio-gateway
+  servers:
   - name: http
     port: 80
     protocol: HTTP
