@@ -38,16 +38,17 @@ pipeline {
       }
     stage('Test success Online boutique v.1 deployment'){
       steps{
-      withKubeConfig([credentialsId: 'jenkins-gke-1']) {
+        withKubeConfig([credentialsId: 'jenkins-gke-1']) {
             sh "kubectl get pods"
+          }
         }
       }
-    }
 
     stage('Deploy onlineboutique-demo v.2') {
       environment {
         DEPLOYMENT_NAME = "onlineboutique-deployment"
       }
+        steps{
         step([
           $class: 'KubernetesEngineBuilder',
           projectId: env.PROJECT_ID,
@@ -59,8 +60,8 @@ pipeline {
         
           }
           
-          
-
+    }
+  
       stage('Test onlineboutique-v2 success'){
         steps{
           withKubeConfig([credentialsId: 'jenkins-gke-1']) {
