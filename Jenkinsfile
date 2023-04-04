@@ -62,7 +62,7 @@ pipeline {
 
           }
         
-      }
+      
           
       }
     stage('Deploy onlineboutique-demo v.2') {
