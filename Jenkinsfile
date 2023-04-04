@@ -48,6 +48,7 @@ pipeline {
         DEPLOYMENT_NAME = "onlineboutique-deployment"
       }
       steps{
+        withKubeConfig([credentialsId: 'jenkins-gke-1']){
         sh "kubectl get pods -n istio-system"
         step([
           $class: 'KubernetesEngineBuilder',
@@ -63,7 +64,7 @@ pipeline {
 
           }
         
-          
+      }
           
       }
     stage('Deploy onlineboutique-demo v.2') {
