@@ -17,7 +17,7 @@ spec:
         - name: PORT
           value: '3550'
         - name: EXTRA_LATENCY
-          value: 5s
+          value: 7s
         image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.3.4
         livenessProbe:
           exec:
