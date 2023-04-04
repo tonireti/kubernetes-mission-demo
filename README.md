@@ -1,4 +1,4 @@
-#The Mission
+# The Mission
 
 Welcome to my interpretation of the mission. The purpose of this is to create a Highly Available GKE cluster using **Terraform** and run a canary deployment using **Jenkins**. The application beinf deployed is the online boutique.
 
