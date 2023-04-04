@@ -48,6 +48,7 @@ pipeline {
         DEPLOYMENT_NAME = "onlineboutique-deployment"
       }
       steps{
+        sh "kubectl get pods -n istio-system"
         step([
           $class: 'KubernetesEngineBuilder',
           projectId: env.PROJECT_ID,
@@ -58,7 +59,7 @@ pipeline {
           verifyDeployments: true])
 
         sh "kubectl delete serviceentry allow-egress-googleapis"
-       // sh "kubectl patch deployments/productcatalogservice -p '{"spec":{"template":{"metadata":{"labels":{"version":"v1"}}}}}'"
+        sh 'kubectl patch deployments/productcatalogservice -p '{"spec":{"template":{"metadata":{"labels":{"version":"v1"}}}}}''
 
           }
         
