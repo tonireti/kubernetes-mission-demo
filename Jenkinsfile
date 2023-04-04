@@ -43,42 +43,12 @@ pipeline {
         }
       }
     }
-    stage('Deploy Ingress to GKE') {
-      environment {
-        DEPLOYMENT_NAME = "onlineboutique-deployment"
-      }
-      steps{
-        withKubeConfig([credentialsId: 'jenkins-gke-1', clusterName:env.PROJECT_ID]){
-        step([
-          $class: 'KubernetesEngineBuilder',
-          projectId: env.PROJECT_ID,
-          clusterName: env.CLUSTER_NAME,
-          location: env.LOCATION,
-          manifestPattern: './release/istio-manifests.yaml',
-          credentialsId: env.CREDENTIALS_ID,
-          verifyDeployments: true])
-
-        sh "kubectl delete serviceentry allow-egress-googleapis"
-        //sh 'kubectl patch deployments/productcatalogservice -p '{"spec":{"template":{"metadata":{"labels":{"version":"v1"}}}}}''
-
-          }
-        
-      }
-          
-      }
+    
     stage('Deploy onlineboutique-demo v.2') {
       environment {
         DEPLOYMENT_NAME = "onlineboutique-deployment"
       }
       steps{
-        step([
-          $class: 'KubernetesEngineBuilder',
-          projectId: env.PROJECT_ID,
-          clusterName: env.CLUSTER_NAME,
-          location: env.LOCATION,
-          manifestPattern: './canary/destination.yaml',
-          credentialsId: env.CREDENTIALS_ID,
-          verifyDeployments: true])
         step([
           $class: 'KubernetesEngineBuilder',
           projectId: env.PROJECT_ID,
@@ -101,24 +71,6 @@ pipeline {
       }
       }
 
-      stage('Deploy traffic splitting') {
-      environment {
-        DEPLOYMENT_NAME = "onlineboutique-deployment"
-      }
-      steps{
-        step([
-          $class: 'KubernetesEngineBuilder',
-          projectId: env.PROJECT_ID,
-          clusterName: env.CLUSTER_NAME,
-          location: env.LOCATION,
-          manifestPattern: './canary/vs-split-traffic.yaml',
-          credentialsId: env.CREDENTIALS_ID,
-          verifyDeployments: true])
-        
-          }
-          
-          
-      }
 
 
 
