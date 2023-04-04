@@ -26,9 +26,9 @@ spec:
   selector:
     istio: istio-gateway
   servers:
-  - name: http
-    port: 80
-    protocol: HTTP
+  - port: http
+      name: http
+      number: 80
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: HTTPRoute
