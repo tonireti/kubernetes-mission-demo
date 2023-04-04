@@ -32,7 +32,7 @@ spec:
       protocol: HTTP
 ---
 apiVersion: networking.istio.io/v1beta1
-kind: HTTPRoute
+kind: VisualService
 metadata:
   name: frontend-route
 spec:
