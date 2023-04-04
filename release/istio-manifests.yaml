@@ -29,9 +29,6 @@ spec:
   - name: http
     port: 80
     protocol: HTTP
-    allowedRoutes:
-      namespaces:
-        from: Same
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: HTTPRoute
