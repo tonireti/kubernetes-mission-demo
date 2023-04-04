@@ -56,8 +56,9 @@ pipeline {
           manifestPattern: './release/istio-manifests.yaml',
           credentialsId: env.CREDENTIALS_ID,
           verifyDeployments: true])
+
         sh "kubectl delete serviceentry allow-egress-googleapis"
-        sh "kubectl patch deployments/productcatalogservice -p '{"spec":{"template":{"metadata":{"labels":{"version":"v1"}}}}}'"
+       // sh "kubectl patch deployments/productcatalogservice -p '{"spec":{"template":{"metadata":{"labels":{"version":"v1"}}}}}'"
 
           }
         
